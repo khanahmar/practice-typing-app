@@ -8,7 +8,7 @@ let text
 let sec = 0
 let min = 0
 let timer
-let score = 0
+
 window.addEventListener("load", getSentence)
 
 inpEl.addEventListener("input", (e) => {
@@ -31,7 +31,6 @@ inpEl.addEventListener("input", (e) => {
     } else if (char != inpArr[i]) {
       character.classList.remove("correct")
       character.classList.add("incorrect")
-      score++
     }
   })
 
@@ -42,8 +41,8 @@ inpEl.addEventListener("input", (e) => {
     text = ""
     textEl.innerHTML = ""
     inpEl.value = ""
+    result.innerText = `You have finished it in ${min} min ${sec} sec.`
     stopTime()
-    result.innerText = `You have done ${score} mistakes`
     getSentence()
   }
 })
@@ -52,11 +51,15 @@ async function getSentence() {
   const url = await fetch("http://api.quotable.io/random")
   const data = await url.json()
   text = data.content
-  text.split("").map((char) => {
-    let span = document.createElement("span")
-    span.innerText = char
-    textEl.appendChild(span)
-  })
+  if (text.length < 80) {
+    text.split("").map((char) => {
+      let span = document.createElement("span")
+      span.innerText = char
+      textEl.appendChild(span)
+    })
+  } else {
+    getSentence()
+  }
 }
 
 function startTime() {
