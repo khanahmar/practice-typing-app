@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background-color: gray;
+  color: white;
+}
+
+.correct {
+  color: rgb(63, 108, 63);
+}
+
+.incorrect {
+  color: rgb(192, 0, 0);
+}
+
+.back-color {
+  color: white;
+  background-color: rgb(63, 63, 63);
+}
